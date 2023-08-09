@@ -6,7 +6,6 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     targetRevision: HEAD
@@ -14,10 +13,6 @@ spec:
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-
-    automated:
-      selfHeal: true
-      prune: true
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -27,18 +22,30 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     targetRevision: HEAD
-    path: prestation-k8s
+    path: prestation-k8s/prestation-service-deployment.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: default
 
-    automated:
-      selfHeal: true
-      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-prestation-argo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: prestation-k8s/postgres-prestation-deployment.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
 
 ---
 apiVersion: argoproj.io/v1alpha1
@@ -48,7 +55,6 @@ metadata:
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     targetRevision: HEAD
@@ -57,27 +63,34 @@ spec:
     server: https://kubernetes.default.svc
     namespace: default
 
-    automated:
-      selfHeal: true
-      prune: true
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: cloud-native-argo-app
+  name: cloud-gateway-argo-app
   namespace: argocd
 spec:
   project: default
-
   source:
     repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     targetRevision: HEAD
-    path: edge-k8s
+    path: edge-k8s/cloud-gateway.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: default
 
-    automated:
-      selfHeal: true
-      prune: true
-
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: registry-service-argo-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: edge-k8s/service-registry.yaml
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
