@@ -1,0 +1,32 @@
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prestation-service-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    path: prestation-k8s/prestation-service-deployment.yaml
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    path: prestation-k8s/postgres-prestation-deployment.yaml
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
