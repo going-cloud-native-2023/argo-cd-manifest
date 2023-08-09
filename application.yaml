@@ -1,0 +1,83 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adhesion-service-argo-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: adhesion-k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+    automated:
+      selfHeal: true
+      prune: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prestation-service-argo-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: prestation-k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+    automated:
+      selfHeal: true
+      prune: true
+
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: document-service-argo-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: document-k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+    automated:
+      selfHeal: true
+      prune: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: cloud-native-argo-app
+  namespace: argocd
+spec:
+  project: default
+
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    targetRevision: HEAD
+    path: edge-k8s
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+
+    automated:
+      selfHeal: true
+      prune: true
+
