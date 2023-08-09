@@ -8,7 +8,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     path: prestation-k8s/prestation-service-deployment.yaml
     targetRevision: HEAD
   destination:
@@ -24,7 +24,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     path: prestation-k8s/postgres-prestation-deployment.yaml
     targetRevision: HEAD
   destination:

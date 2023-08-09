@@ -7,7 +7,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     path: adhesion-k8s
     targetRevision: HEAD
   destination:
