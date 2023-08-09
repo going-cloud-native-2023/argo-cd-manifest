@@ -1,96 +1,74 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: adhesion-service-argo-app
+  name: root-app-of-apps
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    path: kubernetes_manifest   # Directory containing the "App of Apps" configuration
     targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: edge-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    path: edge_k8s
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prestation-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
+    path: prestation-k8s
+    targetRevision: HEAD
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adhesion-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
     path: adhesion-k8s
+    targetRevision: HEAD
   destination:
     server: https://kubernetes.default.svc
     namespace: default
-
 ---
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: prestation-service-argo-app
+  name: document-apps
   namespace: argocd
 spec:
   project: default
   source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
-    targetRevision: HEAD
-    path: prestation-k8s/prestation-service-deployment.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: postgres-prestation-argo-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
-    targetRevision: HEAD
-    path: prestation-k8s/postgres-prestation-deployment.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: document-service-argo-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
-    targetRevision: HEAD
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes_manifest.git
     path: document-k8s
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: cloud-gateway-argo-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
     targetRevision: HEAD
-    path: edge-k8s/cloud-gateway.yaml
-  destination:
-    server: https://kubernetes.default.svc
-    namespace: default
-
----
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: registry-service-argo-app
-  namespace: argocd
-spec:
-  project: default
-  source:
-    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
-    targetRevision: HEAD
-    path: edge-k8s/service-registry.yaml
   destination:
     server: https://kubernetes.default.svc
     namespace: default
