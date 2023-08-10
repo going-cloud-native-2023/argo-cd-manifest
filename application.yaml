@@ -1,0 +1,90 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app-of-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    path: kubernetes_manifest   # Directory containing the "App of Apps" configuration
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: edge-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    path: edge_k8s
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: prestation-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    path: prestation-k8s
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: document-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    path: document-k8s
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: adhesion-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
+    path: adhesion-k8s
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
