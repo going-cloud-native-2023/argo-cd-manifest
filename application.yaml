@@ -22,7 +22,7 @@ spec:
   project: default
   source:
     repoURL: https://github.com/going-cloud-native-2023/kubernetes-manifest.git
-    path: edge_k8s
+    path: edge-k8s
     targetRevision: HEAD
   destination:
     server: 'https://kubernetes.default.svc'
